@@ -1,24 +1,72 @@
-
-// controllers/userController.ts
 import { Request, Response } from 'express';
-import User from '../models/User';
+import { UserService } from '../services/UserService';
+import { User } from '../interfaces/user';
 
-class UserController {
-  // Implement controller methods here
+export class UserController {
+  // ... Existing code ...
+
+  static async getOneUser(req: Request, res: Response): Promise<void> {
+    const userId = parseInt(req.params.id);
+
+    try {
+      const user = await UserService.getOneUser({ id: userId });
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async createUser(req: Request, res: Response): Promise<void> {
+    const user = req.body as User;
+
+    try {
+      const userId = await UserService.createUser(user);
+      res.status(201).json({ id: userId });
+    } catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async updateUser(req: Request, res: Response): Promise<void> {
+    const userId = parseInt(req.params.id);
+    const user = req.body as User;
+
+    try {
+      await UserService.updateUser(userId, user);
+      res.status(204).send();
+    } catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async deleteUser(req: Request, res: Response): Promise<void> {
+    const userId = parseInt(req.params.id);
+
+    try {
+      await UserService.deleteUser(userId);
+      res.status(204).send();
+    } catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+}
+export function getAllUsers(arg0: string, getAllUsers: any) {
+    throw new Error('Function not implemented.');
 }
 
-export default new UserController();
-
-
-/* // src/controllers/userController.ts
-
-import { Request, Response } from 'express';
-import User from '/models/User';
-
-// Use the User interface for type safety
-function createUser(req: Request, res: Response) {
-  const newUser: User = req.body; // Assuming req.body matches the User interface
-  // Perform database operations or other logic
+export function getUserById(arg0: string, getUserById: any) {
+    throw new Error('Function not implemented.');
 }
 
-*/
+export function createUser(arg0: string, createUser: any) {
+    throw new Error('Function not implemented.');
+}
+
+export function updateUser(arg0: string, updateUser: any) {
+    throw new Error('Function not implemented.');
+}
+
