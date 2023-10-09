@@ -3,6 +3,10 @@ import { UserService } from '../services/UserService';
 import { User } from '../interfaces/user';
 
 export class UserController {
+
+  static getRandom() {
+    return "sdjfjdsf"
+  }
   // ... Existing code ...
   static async getAllUsers(req: Request, res: Response): Promise<void> {
     try {

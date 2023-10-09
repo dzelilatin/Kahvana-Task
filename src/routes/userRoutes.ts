@@ -4,6 +4,8 @@ import { UserController } from '../controllers/UserController';
 
 const router = express.Router();
 
+router.get('/', UserController.getRandom);
+
 // Get all users with optional query parameters
 router.get('/users', UserController.getAllUsers);
 

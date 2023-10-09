@@ -9,6 +9,7 @@ app.use(express.json());
 
 // Define routes for User entity
 app.get('/api/users/:id', UserController.getOneUser);
+app.get('/', UserController.getRandom);
 app.post('/api/users', UserController.createUser);
 app.put('/api/users/:id', UserController.updateUser);
 app.delete('/api/users/:id', UserController.deleteUser);

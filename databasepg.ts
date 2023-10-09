@@ -5,7 +5,7 @@ const pool = new Pool({
   host: 'localhost',
   database: 'your_database_name',
   password: 'your_password',
-  port: 5432, // Default PostgreSQL port
+  port: 5432, 
 });
 
 pool.connect((err: Error, client: PoolClient, done: () => void) => {
@@ -13,7 +13,5 @@ pool.connect((err: Error, client: PoolClient, done: () => void) => {
     console.error('Failed to connect to PostgreSQL database:', err);
   } else {
     console.log('Connected to PostgreSQL database');
-    // Perform database operations here
-    // Don't forget to release the client when done: done();
   }
 });
