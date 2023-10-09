@@ -4,6 +4,19 @@ import { User } from '../interfaces/user';
 
 export class UserController {
   // ... Existing code ...
+  static async getAllUsers(req: Request, res: Response): Promise<void> {
+    try {
+      const users = await UserService.getAllUsers();
+      if (users) {
+        res.json(users);
+      } else {
+        res.status(404).json({ error: 'Users not found' });
+      }
+    } catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
 
   static async getOneUser(req: Request, res: Response): Promise<void> {
     const userId = parseInt(req.params.id);

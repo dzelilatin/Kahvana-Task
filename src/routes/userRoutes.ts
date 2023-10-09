@@ -5,6 +5,7 @@ import { UserController } from '../controllers/UserController';
 const router = express.Router();
 
 // Get all users with optional query parameters
+router.get('/users', UserController.getAllUsers);
 
 // Get a single user by ID
 router.get('/users/:id', UserController.getOneUser);

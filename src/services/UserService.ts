@@ -2,7 +2,14 @@ import db from '../database';
 import { User } from '../interfaces/user';
 
 export class UserService {
-  // ... Existing code ...
+  static getAllUsers(): Promise<User | null> {
+    return new Promise((resolve, reject) => {
+      db.get('SELECT * FROM user', (err, row) => {
+        if (err) reject(err);
+        else resolve(row as User || null);
+      });
+    });
+  }
 
   static getOneUser({ id }: { id: number; }): Promise<User | null> {
     return new Promise((resolve, reject) => {
@@ -47,5 +54,14 @@ export class UserService {
       });
     });
   }
+}
+
+
+function reject(err: any) {
+  throw new Error('Function not implemented.');
+}
+
+function resolve(arg0: User) {
+  throw new Error('Function not implemented.');
 }
 
